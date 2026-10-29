@@ -1,0 +1,57 @@
+<h3>{{ esEdicion ? 'Editar Ticket #' + ticket.id : 'Registrar Nuevo Ticket' }}</h3>
+
+<div *ngIf="errorMensaje" style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+  {{ errorMensaje }}
+</div>
+
+<form (ngSubmit)="guardarTicket()" style="display: flex; flex-direction: column; gap: 15px; max-width: 500px;">
+  <div>
+    <label>Asunto (*):</label>
+    <input type="text" [(ngModel)]="ticket.asunto" name="asunto" required style="width: 100%; padding: 8px; margin-top: 5px;">
+  </div>
+
+  <div>
+    <label>Solicitante (*):</label>
+    <input type="text" [(ngModel)]="ticket.solicitante" name="solicitante" required style="width: 100%; padding: 8px; margin-top: 5px;">
+  </div>
+
+  <div>
+    <label>Descripción del Problema (*):</label>
+    <textarea [(ngModel)]="ticket.descripcion" name="descripcion" required style="width: 100%; padding: 8px; margin-top: 5px;" rows="4"></textarea>
+  </div>
+
+  <div>
+    <label>Categoría:</label>
+    <select [(ngModel)]="ticket.categoria" name="categoria" style="width: 100%; padding: 8px; margin-top: 5px;">
+      <option value="Hardware">Hardware</option>
+      <option value="Software">Software</option>
+      <option value="Redes">Redes</option>
+      <option value="Sistemas">Sistemas</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Prioridad:</label>
+    <select [(ngModel)]="ticket.prioridad" name="prioridad" style="width: 100%; padding: 8px; margin-top: 5px;">
+      <option value="Baja">Baja</option>
+      <option value="Media">Media</option>
+      <option value="Alta">Alta</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Estado:</label>
+    <select [(ngModel)]="ticket.estado" name="estado" style="width: 100%; padding: 8px; margin-top: 5px;">
+      <option value="Abierto">Abierto</option>
+      <option value="En Proceso">En Proceso</option>
+      <option value="Cerrado">Cerrado</option>
+    </select>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <button type="submit" style="background-color: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 10px;">
+      Guardar Ticket
+    </button>
+    <a routerLink="/tickets" style="text-decoration: none; color: #555;">Cancelar</a>
+  </div>
+</form>
