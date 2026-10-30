@@ -4,7 +4,7 @@
   {{ errorMensaje }}
 </div>
 
-<table style="width: 100%; border-collapse: collapse; margin-top: 10px; background-color: white;">
+<table style="width: 100%; border-collapse: collapse; margin-top: 10px; background-color: white; border: 1px solid #ddd;">
   <thead>
     <tr style="background-color: #f2f2f2; text-align: left;">
       <th style="padding: 10px; border: 1px solid #ddd;">ID</th>
@@ -17,26 +17,29 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let ticket of tickets">
-      <td style="padding: 10px; border: 1px solid #ddd;">{{ ticket.id }}</td>
-      <td style="padding: 10px; border: 1px solid #ddd;"><strong>{{ ticket.asunto }}</strong></td>
-      <td style="padding: 10px; border: 1px solid #ddd;">{{ ticket.solicitante }}</td>
-      <td style="padding: 10px; border: 1px solid #ddd;">{{ ticket.categoria }}</td>
+    <tr *ngFor="let t of tickets">
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ t.id }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;"><strong>{{ t.asunto }}</strong></td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ t.solicitante }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ t.categoria }}</td>
       <td style="padding: 10px; border: 1px solid #ddd;">
-        <span [style.color]="ticket.prioridad === 'Alta' ? '#c0392b' : ticket.prioridad === 'Media' ? '#d35400' : '#27ae60'" style="font-weight: bold;">
-          {{ ticket.prioridad }}
+        <span [style.color]="t.prioridad === 'Alta' ? '#c0392b' : t.prioridad === 'Media' ? '#d35400' : '#27ae60'" style="font-weight: bold;">
+          {{ t.prioridad }}
         </span>
       </td>
       <td style="padding: 10px; border: 1px solid #ddd;">
-        <span [style.background-color]="ticket.estado === 'Abierto' ? '#e74c3c' : ticket.estado === 'En Proceso' ? '#f39c12' : '#2ecc71'" 
+        <span [style.background-color]="t.estado === 'Abierto' ? '#e74c3c' : t.estado === 'En Proceso' ? '#f39c12' : '#2ecc71'" 
               style="color: white; padding: 4px 8px; border-radius: 3px; font-size: 12px; font-weight: bold;">
-          {{ ticket.estado }}
+          {{ t.estado }}
         </span>
       </td>
       <td style="padding: 10px; border: 1px solid #ddd;">
-        <a [routerLink]="['/tickets/editar', ticket.id]" style="margin-right: 10px; color: #2980b9; text-decoration: none; font-weight: bold;">Editar</a>
-        <button (click)="eliminarTicket(ticket.id!)" style="background-color: #c0392b; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Eliminar</button>
+        <a [routerLink]="['/tickets/editar', t.id]" style="margin-right: 10px; color: #2980b9; text-decoration: none; font-weight: bold;">Editar</a>
+        <button (click)="eliminarTicket(t.id!)" style="background-color: #c0392b; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Eliminar</button>
       </td>
+    </tr>
+    <tr *ngIf="tickets.length === 0">
+      <td colspan="7" style="padding: 15px; text-align: center; color: #777;">No hay tickets registrados en la base de datos.</td>
     </tr>
   </tbody>
 </table>

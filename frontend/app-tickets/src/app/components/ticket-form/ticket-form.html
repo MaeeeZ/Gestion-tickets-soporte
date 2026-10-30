@@ -1,28 +1,28 @@
-<h3>{{ esEdicion ? 'Editar Ticket #' + ticket.id : 'Registrar Nuevo Ticket' }}</h3>
+<h3 style="margin-top: 10px;">{{ esEdicion ? 'Editar Ticket #' + ticket.id : 'Registrar Nuevo Ticket' }}</h3>
 
 <div *ngIf="errorMensaje" style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
   {{ errorMensaje }}
 </div>
 
-<form (ngSubmit)="guardarTicket()" style="display: flex; flex-direction: column; gap: 15px; max-width: 500px;">
+<form (ngSubmit)="guardarTicket()" style="display: flex; flex-direction: column; gap: 15px; max-width: 500px; background-color: white; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
   <div>
-    <label>Asunto (*):</label>
-    <input type="text" [(ngModel)]="ticket.asunto" name="asunto" required style="width: 100%; padding: 8px; margin-top: 5px;">
+    <label style="font-weight: bold;">Asunto (*):</label>
+    <input type="text" [(ngModel)]="ticket.asunto" name="asunto" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
   </div>
 
   <div>
-    <label>Solicitante (*):</label>
-    <input type="text" [(ngModel)]="ticket.solicitante" name="solicitante" required style="width: 100%; padding: 8px; margin-top: 5px;">
+    <label style="font-weight: bold;">Solicitante (*):</label>
+    <input type="text" [(ngModel)]="ticket.solicitante" name="solicitante" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
   </div>
 
   <div>
-    <label>Descripción del Problema (*):</label>
-    <textarea [(ngModel)]="ticket.descripcion" name="descripcion" required style="width: 100%; padding: 8px; margin-top: 5px;" rows="4"></textarea>
+    <label style="font-weight: bold;">Descripción del Problema (*):</label>
+    <textarea [(ngModel)]="ticket.descripcion" name="descripcion" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;" rows="4"></textarea>
   </div>
 
   <div>
-    <label>Categoría:</label>
-    <select [(ngModel)]="ticket.categoria" name="categoria" style="width: 100%; padding: 8px; margin-top: 5px;">
+    <label style="font-weight: bold;">Categoría:</label>
+    <select [(ngModel)]="ticket.categoria" name="categoria" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
       <option value="Hardware">Hardware</option>
       <option value="Software">Software</option>
       <option value="Redes">Redes</option>
@@ -31,8 +31,8 @@
   </div>
 
   <div>
-    <label>Prioridad:</label>
-    <select [(ngModel)]="ticket.prioridad" name="prioridad" style="width: 100%; padding: 8px; margin-top: 5px;">
+    <label style="font-weight: bold;">Prioridad:</label>
+    <select [(ngModel)]="ticket.prioridad" name="prioridad" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
       <option value="Baja">Baja</option>
       <option value="Media">Media</option>
       <option value="Alta">Alta</option>
@@ -40,8 +40,8 @@
   </div>
 
   <div>
-    <label>Estado:</label>
-    <select [(ngModel)]="ticket.estado" name="estado" style="width: 100%; padding: 8px; margin-top: 5px;">
+    <label style="font-weight: bold;">Estado:</label>
+    <select [(ngModel)]="ticket.estado" name="estado" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
       <option value="Abierto">Abierto</option>
       <option value="En Proceso">En Proceso</option>
       <option value="Cerrado">Cerrado</option>

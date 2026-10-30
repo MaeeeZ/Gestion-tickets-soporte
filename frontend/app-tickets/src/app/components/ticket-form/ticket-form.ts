@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -28,16 +28,24 @@ export class TicketFormComponent implements OnInit {
   constructor(
     private ticketService: TicketService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef 
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.esEdicion = true;
-      this.ticketService.getTicket(id).subscribe({
-        next: (data) => this.ticket = data,
-        error: () => this.errorMensaje = 'No se pudo cargar el ticket.'
+      this.ticketService.getTicket(Number(id)).subscribe({
+        next: (data) => {
+          this.ticket = data;
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error('Error al obtener el ticket:', err);
+          this.errorMensaje = 'No se pudo cargar el ticket seleccionado.';
+          this.cdr.detectChanges();
+        }
       });
     }
   }
@@ -50,18 +58,24 @@ export class TicketFormComponent implements OnInit {
 
     if (this.esEdicion) {
       this.ticketService.updateTicket(this.ticket.id!, this.ticket).subscribe({
-        next: () => this.router.navigate(['/tickets']),
+        next: () => {
+          this.router.navigate(['/tickets']);
+        },
         error: (err) => {
           console.error(err);
-          this.errorMensaje = 'Error al actualizar el ticket. ¿El backend está corriendo?';
+          this.errorMensaje = 'Error al actualizar el ticket.';
+          this.cdr.detectChanges();
         }
       });
     } else {
       this.ticketService.createTicket(this.ticket).subscribe({
-        next: () => this.router.navigate(['/tickets']),
+        next: () => {
+          this.router.navigate(['/tickets']);
+        },
         error: (err) => {
           console.error(err);
-          this.errorMensaje = 'Error al crear el ticket. Revisa la conexión con la API.';
+          this.errorMensaje = 'Error al crear el ticket.';
+          this.cdr.detectChanges();
         }
       });
     }
